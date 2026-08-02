@@ -16,6 +16,18 @@ A small Chrome extension that groups tabs opened from links with their source ta
 3. Choose Load unpacked.
 4. Select this folder.
 
+## Tests
+
+The service worker is covered by `node:test`, with `chrome` stubbed out. No dependencies, no
+install step:
+
+```sh
+node --test test/background.test.js
+```
+
+Pass the file explicitly. `node --test test/` resolves `test` as a module name on Node 25 and fails
+with `MODULE_NOT_FOUND` before any test runs.
+
 ## Packaging
 
 The store package holds only what Chrome loads: the manifest, the service worker and the icons.
@@ -52,3 +64,7 @@ gh release create "v$VERSION" "dist/open-in-opener-tab-group-$VERSION.zip"
 ## Privacy
 
 All processing happens locally in Chrome. See [PRIVACY.md](PRIVACY.md).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
