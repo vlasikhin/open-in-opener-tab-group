@@ -16,6 +16,39 @@ A small Chrome extension that groups tabs opened from links with their source ta
 3. Choose Load unpacked.
 4. Select this folder.
 
+## Packaging
+
+The store package holds only what Chrome loads: the manifest, the service worker and the icons.
+Documentation, tests and store artwork stay out of it.
+
+Bump `version` in `manifest.json` first — the archive name follows it. Then, from the repository
+root:
+
+```sh
+VERSION=$(node -p "require('./manifest.json').version")
+mkdir -p dist
+zip -r "dist/open-in-opener-tab-group-$VERSION.zip" \
+  manifest.json background.js icons \
+  -x '*.DS_Store'
+```
+
+Verify the result before uploading:
+
+```sh
+unzip -Z1 "dist/open-in-opener-tab-group-$VERSION.zip"
+```
+
+It should list exactly `manifest.json`, `background.js` and the four files under `icons/`.
+
+Upload the archive in the Chrome Web Store Developer Dashboard under Package, then attach the same
+file to a GitHub release tagged `v$VERSION`:
+
+```sh
+gh release create "v$VERSION" "dist/open-in-opener-tab-group-$VERSION.zip"
+```
+
+`dist/` is not tracked in git; the published archives live on the releases page.
+
 ## Privacy
 
 All processing happens locally in Chrome. See [PRIVACY.md](PRIVACY.md).
