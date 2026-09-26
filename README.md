@@ -8,6 +8,8 @@ A small Chrome extension that groups tabs opened from links with their source ta
 - If the source tab is not grouped, a new group is created for both tabs.
 - A new group is named after the source page.
 - Tabs opened from pinned tabs, other applications, blank tabs, and cross-window tabs remain ungrouped.
+- Optionally, a group left with a single tab is dissolved and the tab stays open. In the extension's
+  options choose Never (default), Only groups created by this extension, or All groups.
 
 ## Local installation
 
@@ -30,7 +32,8 @@ with `MODULE_NOT_FOUND` before any test runs.
 
 ## Packaging
 
-The store package holds only what Chrome loads: the manifest, the service worker and the icons.
+The store package holds only what Chrome loads: the manifest, the service worker, the options page
+and the icons.
 Documentation, tests and store artwork stay out of it.
 
 Bump `version` in `manifest.json` first — the archive name follows it. Then, from the repository
@@ -40,7 +43,7 @@ root:
 VERSION=$(node -p "require('./manifest.json').version")
 mkdir -p dist
 zip -r "dist/open-in-opener-tab-group-$VERSION.zip" \
-  manifest.json background.js icons \
+  manifest.json background.js options.html options.js icons \
   -x '*.DS_Store'
 ```
 
@@ -50,7 +53,8 @@ Verify the result before uploading:
 unzip -Z1 "dist/open-in-opener-tab-group-$VERSION.zip"
 ```
 
-It should list exactly `manifest.json`, `background.js` and the four files under `icons/`.
+It should list exactly `manifest.json`, `background.js`, `options.html`, `options.js` and the four
+files under `icons/`.
 
 Upload the archive in the Chrome Web Store Developer Dashboard under Package, then attach the same
 file to a GitHub release tagged `v$VERSION`:
