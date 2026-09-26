@@ -6,7 +6,7 @@ Open in Opener Tab Group
 
 ## Summary
 
-Automatically groups tabs opened from links with their source tab, names each new group after the source page, and can ungroup lone tabs.
+Groups tabs opened from links with their source tab, names new groups after it, and can ungroup lone tabs.
 
 ## Description
 
@@ -42,7 +42,7 @@ Reads the source tab title and its window and group identifiers so the extension
 
 ### tabGroups
 
-Creates native Chrome tab groups, adds tabs to an existing source group, and names a newly created group after the source page.
+Creates native Chrome tab groups, adds tabs to the source tab's existing group, names new groups after the source page, and, if enabled in the options, finds groups left with a single tab so that tab can be ungrouped.
 
 ### storage
 
@@ -62,17 +62,15 @@ The extension handles website navigation metadata and the source tab title only 
 
 ## Test instructions
 
-1. Open any webpage containing a link.
-2. Command-click the link on macOS or Control-click it on Windows/Linux.
-3. Confirm that the source tab and new tab are placed in one native Chrome tab group.
-4. Confirm that the group name matches the source page title.
-5. Open another link from the source tab and confirm that it joins the same group.
-6. Open a link from another application and confirm that it remains ungrouped.
-7. Pin a source tab, open a link from it in a new tab, and confirm that it remains ungrouped.
-8. Open the extension's options and choose "Only groups created by this extension".
-9. Close one of the two tabs in a group the extension created and confirm that the group disappears while the other tab stays open.
-10. Create a group manually with two tabs, close one, and confirm that the group remains.
-11. Choose "All groups", repeat step 10, and confirm that the group disappears.
+The dashboard field is limited to 500 characters.
+
+1. Command-click (macOS) or Control-click (Windows/Linux) a link.
+2. Both tabs share a group named after the source page.
+3. Another link from the source joins the same group.
+4. Links from another app or a pinned tab stay ungrouped.
+5. In Options choose "Only groups created by this extension". Close one tab of such a group; the group disappears, the other tab stays.
+6. Close one tab of a manual two-tab group; the group remains.
+7. Choose "All groups", repeat step 6; the group disappears.
 
 ## Assets
 
